@@ -8,19 +8,23 @@
         .status-column {
         width: 150px;
         }
+        .awaiting {
+            color: #f8f8f8;
+            background-color: rgb(90, 90, 90);
+        }
 
         .not-started {
-        color: white;
+        color: #f8f8f8;
         background-color: rgb(170, 1, 1);
         }
 
         .in-progress {
-        color: white;
+        color: #f8f8f8;
         background-color: rgb(165, 165, 0);
         }
 
         .completed {
-        color: white;
+        color: #f8f8f8;
         background-color: green;
         }
 
@@ -101,10 +105,23 @@ if ($username == 'admin') {
                 // Display status of project
                 $status = $project['status'];
                 if ($status == NULL){
-                    $status = 'not-started';
+                    $status = 'awaiting';
                 }
 
                 ?>
+                <!-- Status Changing -->
+                <td id='statusColumn_<?php echo $project['projectid']; ?>' class='status-column <?php echo $status; ?>'>
+                    <select class='statusSelect' name='statusSelect' data-projectid='<?php echo $project['projectid']; ?>'>
+                        <option value='awaiting' <?php echo ($status == 'awaiting') ? ' selected' : ''?>>Awaiting</option>
+                        <option value='not-started'<?php echo ($status == 'not-started') ? ' selected' : ''; ?>>Not Started</option>
+                        <option value='in-progress'<?php echo ($status == 'in-progress') ? ' selected' : ''; ?>>In Progress</option>
+                        <option value='completed'<?php echo ($status == 'completed') ? ' selected' : ''; ?>>Completed</option>
+                    </select>
+                    <input type='hidden' name='search' value='<?php echo $search; ?>'>
+                    <input type='hidden' name='project' value='<?php echo $project['projectid']; ?>'>
+                </td>
+                                        
+
                 <!-- Include jQuery library -->
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -127,7 +144,7 @@ if ($username == 'admin') {
                                     console.log(response);
 
                                     // Update the background color of the corresponding <td> element
-                                    $('#statusColumn_' + projectId).removeClass('not-started in-progress completed').addClass(selectedOption);
+                                    $('#statusColumn_' + projectId).removeClass('awaiting not-started in-progress completed').addClass(selectedOption);
                                 },
                                 error: function(xhr, status, error) {
                                     // Handle errors if any
@@ -137,46 +154,60 @@ if ($username == 'admin') {
                         });
                     });
                 </script>
-
-
-
-                <td id='statusColumn_<?php echo $project['projectid']; ?>' class='status-column <?php echo $status; ?>'>
-                    <select class='statusSelect' name='statusSelect' data-projectid='<?php echo $project['projectid']; ?>'>
-                        <option value='not-started'<?php echo ($status == 'not-started') ? ' selected' : ''; ?>>Not Started</option>
-                        <option value='in-progress'<?php echo ($status == 'in-progress') ? ' selected' : ''; ?>>In Progress</option>
-                        <option value='completed'<?php echo ($status == 'completed') ? ' selected' : ''; ?>>Completed</option>
-                    </select>
-                    <input type='hidden' name='search' value='<?php echo $search; ?>'>
-                    <input type='hidden' name='project' value='<?php echo $project['projectid']; ?>'>
-                </td>
-                                        
-
+                        
+                <!-- Claim Button -->
                 <?php
                 // Display which SGS employee is on the project.
                 $sgsc = $project['SGSContact'];
+                                
                 if ($sgsc == NULL) {
-                    echo "<td class='status-column not-started'></td>";
+                    echo "<td class='status-column not-started'>";
+                    echo "<button id='claimButton_$project[projectid]' class='claimButton' data-project='$project[name]'>Claim</button>";
+                    echo "</td>";
                 } else {
                     echo "<td class='status-column completed'>$sgsc</td>";
                 }
-                echo "</tr>";
+                
+                
+                        echo "</tr>";
             }
+                            echo "</table>";
+                        } else {
+                            echo "<p>No projects found.</p>";
+                        } ?>
 
-            echo "</table>";
-        } else {
-            echo "<p>No projects found.</p>";
-        }
+                <script>
+                    $(document).ready(function() {
+                        // When any claimButton is clicked
+                        $('.claimButton').click(function() {
+                            var projectId = $(this).data('project');
 
-        // Check if a status update is submitted
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['status']) && isset($_POST['project'])) {
-            $status = $_POST['status'];
-            $projectName = $_POST['project'];
+                            // Send the claim data to the server using AJAX
+                            $.ajax({
+                                type: "POST",
+                                url: "claim_project.php",
+                                data: { projectId: projectId },
+                                success: function(response) {
+                                    // Handle the response if needed
+                                    console.log(response);
 
-            // Update the status in the database
-            $updateStatusQuery = "UPDATE projects SET status = '$status' WHERE user = '$search' AND name = '$projectName'";
-            $conn->query($updateStatusQuery);
+                                    // Update the "SGSContact" column in the table without reloading the page
+                                    var sgsColumn = $('#statusColumn_' + projectId);
+                                    sgsColumn.removeClass('not-started').addClass('completed').text(response);
 
-        }
+                                    // Hide the claim button
+                                    $('#claimButton_' + projectId).hide();
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle errors if any
+                                    console.error(error);
+                                }
+                            });
+                        });
+                    });
+                </script>
+<?php
+                
     } else {
         echo "No users found.";
     }
@@ -191,6 +222,8 @@ if ($username == 'admin') {
 
     <?php
 
+
+
 // Non-Admin User
 } else {
     echo "<h1>Welcome</h1>";
@@ -203,19 +236,18 @@ if ($username == 'admin') {
     if ($projectsResult->num_rows > 0) {
         echo "<h2>Your Projects</h2>";
         echo "<table>";
-        echo "<tr><th>Name</th><th>Description</th><th>Status</th><th>SGS Contact</th><th>Phone</th><th>Email</th></tr>";
-
+        echo "<tr><th style=width:15%>Name</th><th style=width:25%;>Description</th><th style=width:15%>Status</th><th>SGS Contact</th><th style=width:20%>Phone</th><th>Email</th></tr>";
         while ($project = $projectsResult->fetch_assoc()) {
             echo "<tr>";
             // Display project name and description
-            echo "<td>" . $project['name'] . "</td>";
+            echo "<td>" . $project['name']?> <input type="submit" value="Edit" class="button"> <?php "</td>";
             echo "<td>" . $project['description'] . "</td>";
 
             // Display status of project
             $status = $project['status'];
             if ($status == NULL){
-                $status = 'not-started';
-                $showStatus = "Not Started";
+                $status = 'awaiting';
+                $showStatus = "Awaiting Confirmation";
             } elseif ($status == 'not-started'){
                 $showStatus = "Not Started";
             } elseif ($status == 'in-progress'){
@@ -241,7 +273,7 @@ if ($username == 'admin') {
 
     echo "</table>";
 
-    // Log out button
+    // Log out button and Project Creation Button
     echo '<form action="project_creation_page.html">
             <input type="submit" value="Create A Project" class="button">
         </form>
