@@ -1,0 +1,84 @@
+<html class="container">
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Account Creation</h1>
+        <hr>
+        <form action="create_account.php" method="post" onsubmit="return checkPasswordMatch()" id="info">
+            <div>
+                <label for="username">
+                    Username:<span class="required-field"></span> <input type="text" id="username" name="username" required>
+                </label>
+            </div>
+            <div>
+                <label for="password">
+                    Password:<span class="required-field"></span> <input type="password" id="password" name="password" minlength="8" required> <br>
+                </label>
+            </div>
+            <div>
+                <label for="confirm_password">
+                    Confirm Password:<span class="required-field"></span> <input type="password" id="confirm_password" required><br>
+                </label>
+                <label for="showPasswordCheckbox">
+                    Show passwords: <input type="checkbox" id="showPasswordCheckbox" onchange="togglePasswordVisibility()">
+                </label>
+            </div>
+            <div>
+                <label for="name">
+                    Contact Name:<input type="text" id="name" name="name"> <br> 
+                </label>
+            </div>
+            <div>
+                <label for="company">
+                    Company:<span class="required-field"></span><input type="text" id="name" name="name" required> <br> 
+                </label>
+            </div>
+            <div>
+                <label for="email">
+                    E-Mail Address:<span class="required-field"></span> <input type="email" id="email" name="email" required> <br> 
+                </label>
+            </div>
+            <div>
+                <label for="phone">
+                    Phone Number:<span class="required-field"></span><input type="text" name="phone" id="phone" required> <br>
+                </label>
+            </div>
+            <div>
+                <label for="gender">
+                    Gender: <input type="radio" value="Male" name="gender">Male
+                            <input type="radio" value="Female" name="gender">Female
+                            <input type="radio" value="Other" name="gender">Other 
+                </label>
+            </div>
+            <script>
+                function checkPasswordMatch() {
+                    var password = document.getElementById("password").value;
+                    var confirmPassword = document.getElementById("confirm_password").value;
+                    
+                    if (password === confirmPassword) {
+                        return true;
+                    } else {
+                        alert('Passwords do not match.');
+                        return false;
+                    }
+                    }
+                
+                function togglePasswordVisibility(){
+                    var passwordInput = document.getElementById("password");
+                    var confirmPasswordInput = document.getElementById("confirm_password");
+                    var showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
+
+                    if (showPasswordCheckbox.checked){
+                        passwordInput.type = "text";
+                        confirmPasswordInput.type = "text";
+                    } else{
+                        passwordInput.type = "password";
+                        confirmPasswordInput.type = "password";
+                    }
+                }
+            </script>
+            <input type="submit" value="Create" class="button">
+        </form>
+    </body>
+</html>

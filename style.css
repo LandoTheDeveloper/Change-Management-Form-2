@@ -1,0 +1,133 @@
+/* Reset default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set a background color and text color for the body */
+body {
+  background-color: #f2f2f2;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+/* Center the page content */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Add a style for headings */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Add a style for paragraphs */
+p {
+  margin-bottom: 10px;
+}
+
+/* Style for links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Style for input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Style for form labels */
+label {
+  font-weight: bold;
+}
+
+
+/* Add a style for buttons */
+button.button,
+input[type="submit"].button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  color: #333;
+  border-color: #333;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background-color 0.3s ease;
+  border: solid;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button.button:hover,
+input[type="submit"].button:hover {
+  background-color: #333;
+  color: #f8f8f8;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-start;
+}
+
+/* Style for required fields */
+.required-field::after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Status Styles */
+.status-column {
+  width: 150px;
+}
+
+.not-started {
+  color: white;
+  background-color: rgb(170, 1, 1);
+}
+
+.in-progress {
+  color: white;
+  background-color: rgb(165, 165, 0);
+}
+
+.completed {
+  color: white;
+  background-color: green;
+}
