@@ -1,5 +1,5 @@
 <?php
-// Establish connection to the database (same as in your welcome.php)
+// Establish connection to the database
 $server = 'localhost';
 $db_username = 'root';
 $db_password = '';

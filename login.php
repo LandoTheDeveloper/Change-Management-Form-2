@@ -24,6 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    $adminstmt = $conn->prepare("SELECT name, contactNumber, contactEmail, password FROM admins WHERE name = ? AND password = ?");
+    $adminstmt->bind_param("ss", $username, $password);
+    $adminstmt->execute();
+    $admin_result = $adminstmt->get_result();
+
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             // Start a session
@@ -33,11 +38,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Store the username in a session variable
             $_SESSION['username'] = $username;
 
-            // Redirect to welcome.php
-            header("Location: welcome.php");
+            // Redirect to home_page.php
+            header("Location: home_page.php");
             exit();
         }
-    } else {
+    } elseif ($admin_result->num_rows > 0){
+        while ($row = $admin_result->fetch_assoc()) {
+            // Start a session
+            session_start();
+
+            // Store the username in a session variable
+            $_SESSION['username'] = $username;
+
+            // Redirect to home_page.php
+            header("Location: home_page.php");
+            exit();
+        }
+    }else {
         header("Location: SGSLogin.php?error=incorrect");
         ?>
         <form action="SGSLogin.php" method="post">

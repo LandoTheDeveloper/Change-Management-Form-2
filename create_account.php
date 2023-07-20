@@ -25,7 +25,7 @@ $stmt = $connection->prepare("INSERT INTO users (username, password, email, gend
 $stmt->bind_param("sssssss", $username, $password, $email, $gender, $phone, $name, $company);
 
 if ($stmt->execute()) {
-    // Redirect to welcome.php with the username as a POST parameter
+    // Redirect to home_page.php with the username as a POST parameter
     header('Location: http://localhost/demo/SGSLogin.php');
     exit;
 } else {

@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare("INSERT INTO projects (name, description, user, company, dateCreated) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $proj_name, $proj_desc, $user, $company, $date);
     if ($stmt->execute()) {
-        header("Location: welcome.php");
+        header("Location: home_page.php");
         exit;
     }
 

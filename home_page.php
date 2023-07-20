@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="container">
 <head>
-    <title>Welcome</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* Status Styles */
@@ -46,8 +46,14 @@ session_start();
 // Retrieve the username from the session variable
 $username = $_SESSION['username'] ?? '';
 
-// If the user is admin
-if ($username == 'admin') {
+// Check if the user is an admin
+$isAdmin = $conn->prepare("SELECT name FROM admins WHERE name = ?;");
+$isAdmin->bind_param("s", $username);
+$isAdmin->execute();
+$isAdmin->bind_result($_isAdmin);
+$isAdmin->fetch();
+$isAdmin->close();
+if ($_isAdmin) {
     echo '<h1>Admin Panel</h1>';
     ?>
     <!-- Search Form -->
@@ -176,6 +182,9 @@ if ($username == 'admin') {
                             echo "<p>No projects found.</p>";
                         } ?>
 
+                <!-- Include jQuery library -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
                 <script>
                     $(document).ready(function() {
                         // When any claimButton is clicked
@@ -226,8 +235,7 @@ if ($username == 'admin') {
 
 // Non-Admin User
 } else {
-    echo "<h1>Welcome</h1>";
-    echo "Welcome " . $username . "<br> <br>";
+    echo "<h1>Welcome $username</h1>";
 
     // Retrieve the user's projects
     $userProjects = "SELECT name, description, status, SGSContact, contactNumber, contactEmail FROM projects WHERE user = '$username'";
