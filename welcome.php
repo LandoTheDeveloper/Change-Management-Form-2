@@ -85,7 +85,7 @@ if ($username == 'admin') {
         echo "</table>";
 
         // Retrieve the user's projects
-        $userProjects = "SELECT name, description, status, SGSContact FROM projects WHERE user = '$search'";
+        $userProjects = "SELECT name, description, status, SGSContact, projectid FROM projects WHERE user = '$search'";
         $projectsResult = $conn->query($userProjects);
 
         if ($projectsResult->num_rows > 0) {
@@ -100,6 +100,9 @@ if ($username == 'admin') {
 
                 // Display status of project
                 $status = $project['status'];
+                if ($status == NULL){
+                    $status = 'not-started';
+                }
 
                 ?>
                 <!-- Include jQuery library -->
@@ -107,23 +110,24 @@ if ($username == 'admin') {
 
                 <script>
                     $(document).ready(function() {
-                        // When the statusSelect dropdown changes
+                        // When any statusSelect dropdown changes
                         $('.statusSelect').change(function() {
                             var selectedOption = $(this).val();
-                            var projectId = $(this).data('project');
+                            var projectId = $(this).data('projectid');
+                            console.log('Selected Option:', selectedOption);
+                            console.log('Project ID:', projectId);
 
                             // Send the data to the server using AJAX
                             $.ajax({
                                 type: "POST",
-                                url: "update_status.php", // The URL to your server-side script that handles the database update
+                                url: "update_status.php",
                                 data: { selectedOption: selectedOption, projectId: projectId },
                                 success: function(response) {
                                     // Handle the response if needed
                                     console.log(response);
 
-                                    // Update the background color of the parent <td> element
-                                    var statusColumn = $(this).closest('.status-column');
-                                    statusColumn.removeClass('not-started in-progress completed').addClass(selectedOption);
+                                    // Update the background color of the corresponding <td> element
+                                    $('#statusColumn_' + projectId).removeClass('not-started in-progress completed').addClass(selectedOption);
                                 },
                                 error: function(xhr, status, error) {
                                     // Handle errors if any
@@ -135,19 +139,19 @@ if ($username == 'admin') {
                 </script>
 
 
+
+                <td id='statusColumn_<?php echo $project['projectid']; ?>' class='status-column <?php echo $status; ?>'>
+                    <select class='statusSelect' name='statusSelect' data-projectid='<?php echo $project['projectid']; ?>'>
+                        <option value='not-started'<?php echo ($status == 'not-started') ? ' selected' : ''; ?>>Not Started</option>
+                        <option value='in-progress'<?php echo ($status == 'in-progress') ? ' selected' : ''; ?>>In Progress</option>
+                        <option value='completed'<?php echo ($status == 'completed') ? ' selected' : ''; ?>>Completed</option>
+                    </select>
+                    <input type='hidden' name='search' value='<?php echo $search; ?>'>
+                    <input type='hidden' name='project' value='<?php echo $project['projectid']; ?>'>
+                </td>
+                                        
+
                 <?php
-                // Change status drop down
-                echo "<td class='status-column $status'>
-                        <select class='statusSelect' name='statusSelect' data-project='" . $project['name'] . "'>
-                            <option value='not-started'" . ($status == 'not-started' ? ' selected' : '') . ">Not Started</option>
-                            <option value='in-progress'" . ($status == 'in-progress' ? ' selected' : '') . ">In Progress</option>
-                            <option value='completed'" . ($status == 'completed' ? ' selected' : '') . ">Completed</option>
-                        </select>
-                        <input type='hidden' name='search' value='$search'>
-                        <input type='hidden' name='project' value='" . $project['name'] . "'>
-                    </td>";
-
-
                 // Display which SGS employee is on the project.
                 $sgsc = $project['SGSContact'];
                 if ($sgsc == NULL) {
@@ -209,7 +213,17 @@ if ($username == 'admin') {
 
             // Display status of project
             $status = $project['status'];
-            echo "<td class='status-column $status'>$status</td>";
+            if ($status == NULL){
+                $status = 'not-started';
+                $showStatus = "Not Started";
+            } elseif ($status == 'not-started'){
+                $showStatus = "Not Started";
+            } elseif ($status == 'in-progress'){
+                $showStatus = "In Progress";
+            } else {
+                $showStatus = "Completed";
+            }
+            echo "<td class='status-column $status'>$showStatus</td>";
 
             // Display which SGS employee is on the project.
             echo "<td>" . $project['SGSContact'] . "</td>";
