@@ -111,23 +111,3 @@ th {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
-/* Status Styles */
-.status-column {
-  width: 150px;
-}
-
-.not-started {
-  color: white;
-  background-color: rgb(170, 1, 1);
-}
-
-.in-progress {
-  color: white;
-  background-color: rgb(165, 165, 0);
-}
-
-.completed {
-  color: white;
-  background-color: green;
-}

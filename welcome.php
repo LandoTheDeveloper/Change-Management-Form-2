@@ -100,17 +100,53 @@ if ($username == 'admin') {
 
                 // Display status of project
                 $status = $project['status'];
+
+                ?>
+                <!-- Include jQuery library -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                <script>
+                    $(document).ready(function() {
+                        // When the statusSelect dropdown changes
+                        $('.statusSelect').change(function() {
+                            var selectedOption = $(this).val();
+                            var projectId = $(this).data('project');
+
+                            // Send the data to the server using AJAX
+                            $.ajax({
+                                type: "POST",
+                                url: "update_status.php", // The URL to your server-side script that handles the database update
+                                data: { selectedOption: selectedOption, projectId: projectId },
+                                success: function(response) {
+                                    // Handle the response if needed
+                                    console.log(response);
+
+                                    // Update the background color of the parent <td> element
+                                    var statusColumn = $(this).closest('.status-column');
+                                    statusColumn.removeClass('not-started in-progress completed').addClass(selectedOption);
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle errors if any
+                                    console.error(error);
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+
+                <?php
+                // Change status drop down
                 echo "<td class='status-column $status'>
-                        <form method='post' action=''>
-                            <select name='status' onchange='this.form.submit()'>
-                                <option value='not-started'" . ($status == 'not-started' ? ' selected' : '') . ">Not Started</option>
-                                <option value='in-progress'" . ($status == 'in-progress' ? ' selected' : '') . ">In Progress</option>
-                                <option value='completed'" . ($status == 'completed' ? ' selected' : '') . ">Completed</option>
-                            </select>
-                            <input type='hidden' name='search' value='$search'>
-                            <input type='hidden' name='project' value='" . $project['name'] . "'>
-                        </form>
-                      </td>";
+                        <select class='statusSelect' name='statusSelect' data-project='" . $project['name'] . "'>
+                            <option value='not-started'" . ($status == 'not-started' ? ' selected' : '') . ">Not Started</option>
+                            <option value='in-progress'" . ($status == 'in-progress' ? ' selected' : '') . ">In Progress</option>
+                            <option value='completed'" . ($status == 'completed' ? ' selected' : '') . ">Completed</option>
+                        </select>
+                        <input type='hidden' name='search' value='$search'>
+                        <input type='hidden' name='project' value='" . $project['name'] . "'>
+                    </td>";
+
 
                 // Display which SGS employee is on the project.
                 $sgsc = $project['SGSContact'];
