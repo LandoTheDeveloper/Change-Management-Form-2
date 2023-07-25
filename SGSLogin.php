@@ -37,6 +37,11 @@
             </label>
         </div>
         <div>
+            <label for="forgotPassword">
+                <p class="forgotPass">Forgot Password?</p>
+            </label>
+        </div>
+        <div>
             <label>
                 Show Password: <input type="checkbox" id="showPasswordCheckbox" onchange="togglePasswordVisibility()">
             </label>
