@@ -344,7 +344,7 @@ if ($_isAdmin) {
     if ($projectsResult->num_rows > 0) {
         echo "<h2>Your Projects</h2>";
         echo "<table>";
-        echo "<tr><th style=width:15%>Name</th><th style=width:25%;>Description</th><th style=width:15%>Status</th><th>SGS Contact</th><th style=width:20%>Phone</th><th>Email</th></tr>";
+        echo "<tr><th>Name</th><th>Description</th><th>Status</th><th>SGS Contact</th><th>Phone</th><th>Email</th></tr>";
         while ($project = $projectsResult->fetch_assoc()) {
             echo "<tr>";
             // Display project name and description
@@ -367,16 +367,24 @@ if ($_isAdmin) {
             }
             echo "<td class='status-column $status'>$showStatus</td>";
 
-            // Display which SGS employee is on the project.
-            echo "<td>" . $project['SGSContact'] . "</td>";
-            // Display employee contact information
-            echo "<td>" . $project['contactNumber'] . "</td>";
-            echo "<td>" . $project['contactEmail'] . "</td>";
+            // Get admin contact information and fill it into the table
+            $adminContact = $project['SGSContact'];
+            $admins = "SELECT name, contactNumber, contactEmail FROM admins WHERE name = '$adminContact'";
+            $adminResult = $conn->query($admins);
+            while ($admin = $adminResult->fetch_assoc()){
+                // Display which SGS employee is on the project.
+                echo "<td>" . $project['SGSContact'] . "</td>";
+                // Display employee contact information
+                echo "<td>" . $admin['contactNumber'] . "</td>";
+                echo "<td>" . $admin['contactEmail'] . "</td>";
 
-            echo "</tr>";
+                echo "</tr>";
+            }
+            
         }
 
         echo "</table>";
+    // If no projects are found
     } else {
         echo "<p>No projects found.</p>";
     }
