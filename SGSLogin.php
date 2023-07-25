@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html class="container">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS Login</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        function togglePasswordVisibility() {
-            var passwordInput = document.getElementById("password");
-            var showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
-
-            if (showPasswordCheckbox.checked) {
-                passwordInput.type = "text";
-            } else {
-                passwordInput.type = "password";
-            }
-        }
-    </script>
+    <script src="passwordSecurity.js"></script>
 </head>
 <body>
     <h1>Login</h1>

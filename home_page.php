@@ -1,102 +1,32 @@
 <!DOCTYPE html>
 <html class="container">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
+<meta charset="UTF-8">
 
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 20px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: #f8f8f8;
-  padding: 10px 15px;
-  border: none;
-  margin-left: 603px;
-  }
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
-.forgotPass {
-    font-size: 12px;
-}
-
-</style>
+<link rel="stylesheet" href="appStyle.css">
 </head>
 <body>
+
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
+  <script src="openSettings.js"></script>
+</div>
+
+<body onload="closeNav()"></body>
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <a href="#">Account</a>
-  <a href="#">Appearance</a>
+    <label class="switch"> 
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+    </label>
+  <script src="toggle-theme.js"></script>
   <a href="#">Notifications</a>
-  <a href="#">Help Desk</a>
+  <a href="https://www.sgstechnologies.net/contact">Help Desk</a>
 </div>
 
-<div id="main">
-  <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
-</div>
-
-<script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginRight = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginRight = "0";
-}
-
-
-</script>
 </body>
 
 
@@ -348,7 +278,7 @@ if ($_isAdmin) {
         while ($project = $projectsResult->fetch_assoc()) {
             echo "<tr>";
             // Display project name and description
-            echo "<td>" . $project['name']?> <input type="submit" value="Edit" class="button"> <?php "</td>";
+            echo "<td>" . $project['name'];
             echo "<td>" . $project['description'] . "</td>";
 
             // Display status of project
@@ -360,7 +290,7 @@ if ($_isAdmin) {
                 $showStatus = "Not Started";
             } elseif ($status == 'in-progress'){
                 $showStatus = "In Progress";
-            } elseif ($status = "Completed") {
+            } elseif ($status = "completed") {
                 $showStatus = "Completed";
             } else {
                 $showStatus = "Awaiting Confirmation";

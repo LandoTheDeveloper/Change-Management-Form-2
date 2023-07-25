@@ -51,33 +51,7 @@
                             <input type="radio" value="Other" name="gender">Other 
                 </label>
             </div>
-            <script>
-                function checkPasswordMatch() {
-                    var password = document.getElementById("password").value;
-                    var confirmPassword = document.getElementById("confirm_password").value;
-                    
-                    if (password === confirmPassword) {
-                        return true;
-                    } else {
-                        alert('Passwords do not match.');
-                        return false;
-                    }
-                    }
-                
-                function togglePasswordVisibility(){
-                    var passwordInput = document.getElementById("password");
-                    var confirmPasswordInput = document.getElementById("confirm_password");
-                    var showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
-
-                    if (showPasswordCheckbox.checked){
-                        passwordInput.type = "text";
-                        confirmPasswordInput.type = "text";
-                    } else{
-                        passwordInput.type = "password";
-                        confirmPasswordInput.type = "password";
-                    }
-                }
-            </script>
+            <script src="passwordSecurity.js"></script>
             <input type="submit" value="Create" class="button">
         </form>
     </body>

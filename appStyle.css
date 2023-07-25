@@ -1,0 +1,258 @@
+/* Reset default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set a default background color and text color for the body */
+body {
+  background-color: #f2f2f2;
+  color: #333;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add light mode styles */
+body.light-mode {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+/* Add dark mode styles */
+body.dark-mode {
+  background-color: #222222;
+  color: #f8f8f8;
+}
+
+/* Center the page content */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Add a style for headings */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Add a style for paragraphs */
+p {
+  margin-bottom: 10px;
+}
+
+/* Style for links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Style for input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Style for form labels */
+label {
+  font-weight: bold;
+}
+
+/* Add a style for buttons */
+button.button,
+input[type="submit"].button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  color: #333;
+  border-color: #333;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background-color 0.3s ease;
+  border: solid;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button.button:hover,
+input[type="submit"].button:hover {
+  background-color: #333;
+  color: #f8f8f8;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-start;
+}
+
+/* Style for required fields */
+.required-field::after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+/* Table Styles for Dark Mode */
+body.dark-mode table {
+  background-color: #333;
+  color: #f8f8f8;
+}
+
+body.dark-mode th,
+body.dark-mode td {
+  border-color: #f8f8f8;
+}
+
+body.dark-mode th {
+  background-color: #444;
+}
+
+body.dark-mode tr:nth-child(even) {
+  background-color: #777;
+}
+
+/* Table Styles for Light Mode */
+body.light-mode table {
+  background-color: #f8f8f8;
+  color: #000;
+}
+
+body.light-mode th,
+body.light-mode td {
+  border-color: #444;
+}
+
+body.light-mode th {
+  background-color: #f8f8f8;
+}
+
+body.light-mode tr:nth-child(odd) {
+  background-color: #ccc;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: #f8f8f8;
+  padding: 10px 15px;
+  border: none;
+  margin-left: 603px;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+/* Customize the toggle switch appearance */
+.switch {
+  position: relative;
+  margin-top: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide the default checkbox input */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Customize the toggle switch slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+/* Add some styles for when the switch is on (checked) */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
