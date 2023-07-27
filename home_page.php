@@ -102,6 +102,13 @@ session_start();
                 var newPassword = $("#newPassword").val();
                 var currentPassword = $("#currentPassword").val();
                 
+                if (newPassword.length < 8) {
+                    console.log("Too short");
+                    return false;
+                } else {
+                    return true;
+                }
+
                 // Send the data to the server using AJAX
                 $.ajax({
                     type: "POST",

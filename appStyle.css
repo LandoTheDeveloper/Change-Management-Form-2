@@ -108,6 +108,11 @@ table {
   margin-bottom: 20px;
 }
 
+th, 
+td {
+  border: 1px solid #000;
+}
+
 /* Table Styles for Dark Mode */
 body.dark-mode table {
   background-color: #333;
