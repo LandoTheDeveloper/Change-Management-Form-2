@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_start();
     // Retrieve username
     $user = $_SESSION['username'];
-
+    $proj_name = $_POST['proj_name'];
+    $proj_desc = $_POST['proj_desc'];
     // Get date of creation
     $date = date("m/d/Y");
 
