@@ -1,13 +1,18 @@
-// Open the setting menu
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginRight = "250px";
-  document.getElementById("mySidebar").classList.remove("sidebar-hidden");
+function openSidebar() {
+  document.getElementById("mySidebar").classList.add("show");
 }
 
-// Close the setting menu
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginRight = "0";
-  document.getElementById("mySidebar").classList.add("sidebar-hidden");
+// Function to hide the sidebar
+function closeSidebar() {
+  document.getElementById("mySidebar").classList.remove("show");
+}
+
+// Function to toggle the sidebar visibility
+function toggleSidebar() {
+  var sidebar = document.getElementById("mySidebar");
+  if (sidebar.classList.contains("show")) {
+      closeSidebar();
+  } else {
+      openSidebar();
+  }
 }

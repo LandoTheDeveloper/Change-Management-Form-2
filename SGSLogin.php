@@ -5,45 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS Login</title>
     <link rel="stylesheet" href="appStyle.css">
-    <script src="passwordSecurity.js"></script>
+    
 </head>
 <body>
 
- <!-- Settings Sidebar -->
+
+<!-- Settings Sidebar -->
 <div id="main">
     <!-- Open Sidebar -->
-  <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
-  <script src="openSettings.js"></script>
+  <button class="openbtn" onclick="toggleSidebar()" id="openbtn">⚙ Settings</button>  
 </div>
 
-<!-- Fixes bug that opens settings panel when site loads -->
-<body onload="closeNav()"></body>
-
-<script src="updatePassword.js"></script>
-<div id="mySidebar" class="sidebar sidebar-hidden">
+<div id="modal-content"></div>
+<div id="mySidebar" class="sidebar">
     <!-- Close Sidebar -->
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-
+  <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()" id="sidebarTxt">×</a>
+  <!-- Account Settings -->
+  <a href="javascript:void(0)" onclick="toggleSubmenu()" id="sidebarTxt">Account</a>
   <!-- Appearance Settings -->
-  <script src="appearanceSettings.js"></script>
-  <a href="javascript:void(0)" onclick="toggleAppearanceMenu()">Appearance</a>
+  <a href="javascript:void(0)" onclick="toggleAppearanceMenu()" id="sidebarTxt">Appearance</a>
   <ul id="appearanceSubmenu" style="display:none;">
     <li>   
         <!-- Light and Dark mode toggle -->
-        <a> Light/Dark Mode: </a>
+        <a id="submenuText"> Light/Dark Mode: </a>
             <label class="switch"> 
                 <input type="checkbox" id="theme-toggle" style="display:none;">
                 <span class="slider"></span>
             </label>
-        <script src="toggle-theme.js"></script></li>
+        </li>
   </ul>
   
 
   <!-- Notification Settings -->
-  <a href="#">Notifications</a>
-  <a href="https://www.sgstechnologies.net/contact">Contact Us</a>
+  <a href="#" id="sidebarTxt">Notifications</a>
+  <a href="https://www.sgstechnologies.net/contact" id="sidebarTxt">Contact Us</a>
 </div>
-
     <h1>Login</h1>
     <hr>
     <?php
@@ -75,5 +71,9 @@
     <form action="new account.html" method="get">
         <input type="submit" value="Create new account" class="button">
     </form>
+    <script src="passwordSecurity.js"></script>
+    <script src="appearanceSettings.js"></script>
+    <script src="openSettings.js"></script>
+    <script src="toggle-theme.js"></script>
 </body>
 </html>

@@ -3,12 +3,13 @@
 // Start a session
 session_start();
 ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <html class="container">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-
-<title>Home Page</title>
-<link rel="stylesheet" href="appStyle.css">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="appStyle.css">
 </head>
 <body>
 
@@ -16,38 +17,37 @@ session_start();
 <!-- Settings Sidebar -->
 <div id="main">
     <!-- Open Sidebar -->
-  <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
-  <script src="openSettings.js"></script>
+  <button class="openbtn" onclick="toggleSidebar()" id="openbtn">⚙ Settings</button>  
 </div>
 
-<script src="updatePassword.js"></script>
-<div id="mySidebar" class="sidebar sidebar-hidden">
+
+<div id="mySidebar" class="sidebar">
     <!-- Close Sidebar -->
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()" id="sidebarTxt">×</a>
   <!-- Account Settings -->
-  <a href="javascript:void(0)" onclick="toggleSubmenu()">Account</a>
+  <a href="javascript:void(0)" onclick="toggleSubmenu()" id="sidebarTxt">Account</a>
   <ul id="accountSubmenu">
-    <li><a href="#" onclick="openPasswordPopup()">Change Password</a></li>
+    <li><a href="#" onclick="openPasswordPopup()" id="sidebarTxt">Change Password</a></li>
   </ul>
 
   <!-- Appearance Settings -->
-  <script src="appearanceSettings.js"></script>
-  <a href="javascript:void(0)" onclick="toggleAppearanceMenu()">Appearance</a>
+  
+  <a href="javascript:void(0)" onclick="toggleAppearanceMenu()" id="sidebarTxt">Appearance</a>
   <ul id="appearanceSubmenu" style="display:none;">
     <li>   
         <!-- Light and Dark mode toggle -->
-        <a> Light/Dark Mode: </a>
+        <a id="submenuText"> Light/Dark Mode: </a>
             <label class="switch"> 
                 <input type="checkbox" id="theme-toggle" style="display:none;">
                 <span class="slider"></span>
             </label>
-        <script src="toggle-theme.js"></script></li>
+        </li>
   </ul>
   
 
   <!-- Notification Settings -->
-  <a href="#">Notifications</a>
-  <a href="https://www.sgstechnologies.net/contact">Contact Us</a>
+  <a href="#" id="sidebarTxt">Notifications</a>
+  <a href="https://www.sgstechnologies.net/contact" id="sidebarTxt">Contact Us</a>
 
   <!-- Log Out Button -->
   <form action="SGSLogin.php" id="logOut">
@@ -58,10 +58,10 @@ session_start();
 </div>
 
 <!-- Password change popup -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="updatePassword.js"></script>
+
+
 <div id="passwordPopup" class="modal">
-    <div class="modal-content">
+    <div id="modal-content" class="modal-content" >
         <span class="close" onclick="closePasswordPopup()">×</span>
         <h2>Change Password</h2>
         <form action="" id="changePasswordForm">
@@ -75,6 +75,7 @@ session_start();
         </form>
     </div>
 </div>
+
 
 <script>
     
@@ -102,8 +103,6 @@ session_start();
                 if (newPassword.length < 8) {
                     console.log("Too short");
                     return false;
-                } else {
-                    return true;
                 }
 
                 // Send the data to the server using AJAX
@@ -217,10 +216,6 @@ if ($_isAdmin) {
                     <input type='hidden' name='search' value='<?php echo $search; ?>'>
                     <input type='hidden' name='project' value='<?php echo $project['projectid']; ?>'>
                 </td>
-                                        
-
-                <!-- Include jQuery library -->
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                 <script>
                     $(document).ready(function() {
@@ -272,9 +267,6 @@ if ($_isAdmin) {
                         } else {
                             echo "<p>No projects found.</p>";
                         } ?>
-
-                <!-- Include jQuery library -->
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                 <script>
                     $(document).ready(function() {
@@ -378,5 +370,11 @@ if ($_isAdmin) {
 }
 ?>
 
+
+<!-- js scripts -->
+<script src="updatePassword.js"></script>
+<script src="appearanceSettings.js"></script>
+<script src="openSettings.js"></script>
+<script src="toggle-theme.js"></script>
 </body>
 </html>

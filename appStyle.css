@@ -7,22 +7,22 @@
 
 /* Set a default background color and text color for the body */
 body {
-  background-color: #f2f2f2;
+  background-color: #f8f8f8;
   color: #333;
   font-family: Arial, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Add light mode styles */
 body.light-mode {
-  background-color: #f2f2f2;
+  background-color: #f8f8f8;
   color: #333;
 }
 
 /* Add dark mode styles */
 body.dark-mode {
   background-color: #222222;
-  color: #f8f8f8;
+  color: #ffffff;
 }
 
 /* Center the page content */
@@ -61,10 +61,21 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* Style for form labels */
+/* Style for the checkbox label */
 label {
   font-weight: bold;
+  position: relative;
 }
+
+/* Style for the checkbox input */
+input[type="checkbox"] {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-340px, -6px);
+  margin-right: 10px;
+}
+
 
 /* Add a style for buttons */
 button.button,
@@ -102,7 +113,7 @@ input[type="submit"].button {
 button.button:hover,
 input[type="submit"].button:hover {
   background-color: #333;
-  color: #f8f8f8;
+  color: #ffffff;
 }
 
 .button-container {
@@ -132,12 +143,12 @@ td {
 /* Table Styles for Dark Mode */
 body.dark-mode table {
   background-color: #333;
-  color: #f8f8f8;
+  color: #ffffff;
 }
 
 body.dark-mode th,
 body.dark-mode td {
-  border:1px solid #f8f8f8;
+  border:1px solid #feffec;
   padding: 5px;
 }
 
@@ -166,28 +177,47 @@ body.light-mode th {
 }
 
 body.light-mode tr:nth-child(odd) {
-  background-color: #ccc;
+  background-color: #ededed;
 }
 
 /* Sidebar Styles */
-.sidebar {
+.sidebar.light-mode {
   height: 100%;
   width: 250px;
   position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
-  background-color: #111;
+  background-color: #f8f8f8;
   overflow-x: hidden;
   transition: .5s;
   padding-top: 60px;
 }
 
-.sidebar-hidden {
-  width: 0;
+.sidebar.dark-mode {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #222222;
+  overflow-x: hidden;
+  transition: .5s;
+  padding-top: 60px;
 }
 
-.sidebar a {
+
+.sidebar.light-mode a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #000;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar.dark-mode a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -196,8 +226,12 @@ body.light-mode tr:nth-child(odd) {
   transition: 0.3s;
 }
 
-.sidebar a:hover {
-  color: #f1f1f1;
+.sidebar.light-mode a:hover {
+  color: #818181;
+}
+
+.sidebar.dark-mode a:hover {
+  color: #ffffff;
 }
 
 .sidebar .closebtn {
@@ -208,19 +242,29 @@ body.light-mode tr:nth-child(odd) {
   margin-left: 50px;
 }
 
-.openbtn {
+.openbtn.dark-mode {
   font-size: 20px;
   cursor: pointer;
   background-color: #222;
-  color: #f8f8f8;
+  color: #ffffff;
   padding: 10px 15px;
   border: none;
   margin-left: 603px;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  transform: translateX(200px);
+}
+.openbtn.light-mode {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  color: #222;
+  padding: 10px 15px;
+  border: none;
+  margin-left: 603px;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  transform: translateX(200px);
 }
 
-.openbtn:hover {
-  background-color: #444;
-}
 
 #main {
   transition: margin-left 0.5s;
@@ -243,15 +287,26 @@ body.light-mode tr:nth-child(odd) {
   margin-bottom: 10px;
 }
 
-#appearanceSubmenu li a {
+#submenuText li.light-mode {
+  text-decoration: none;
+  color: #222;
+  font-size: 16px;
+  display: block;
+}
+
+#appearanceSubmenu li.light-mode .slider {
+  background-color: #ccc;
+}
+
+#appearanceSubmenu li.dark-mode #submenuText {
   text-decoration: none;
   color: #818181;
   font-size: 16px;
   display: block;
 }
 
-#appearanceSubmenu li a:hover {
-  color: #f1f1f1;
+#appearanceSubmenu li.dark-mode .slider {
+  background-color: #444;
 }
 
 /* Style the Light/Dark Mode toggle switch */
@@ -363,22 +418,22 @@ input:checked + .slider:before {
   text-align: center;
 }
 .awaiting {
-    color: #f8f8f8;
+    color: #ffffff;
     background-color: rgb(90, 90, 90);
 }
 
 .not-started {
-color: #f8f8f8;
-background-color: rgb(170, 1, 1);
+  color: #ffffff;
+  background-color: rgb(170, 1, 1);
 }
 
 .in-progress {
-color: #f8f8f8;
-background-color: rgb(165, 165, 0);
+  color: #ffffff;
+  background-color: rgb(165, 165, 0);
 }
 
 .completed {
-color: #f8f8f8;
+color: #ffffff;
 background-color: green;
 }
 
@@ -394,13 +449,23 @@ background-color: green;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
-  background-color: #f2f2f2;
+
+.modal-content.light-mode {
+  background-color: #f8f8f8;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
 }
+
+.modal-content.dark-mode {
+  background-color: #444;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
 
 .close {
   color: #aaa;
@@ -418,15 +483,10 @@ background-color: green;
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
   margin-top: 10px;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 label,
@@ -442,7 +502,19 @@ input {
   border-radius: 4px;
 }
 
-/* Add this to your existing CSS styles */
+#mySidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Initially hide the sidebar outside the screen */
+  width: 300px;
+  height: 100%;
+  transition: right 0.3s ease; /* Add transition for a smooth slide effect */
+}
+
+#mySidebar.show {
+  right: 0; /* Show the sidebar by bringing it to the right side */
+}
+
 #accountSubmenu {
   display: none;
   list-style-type: none;
