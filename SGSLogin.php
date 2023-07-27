@@ -9,27 +9,41 @@
 </head>
 <body>
 
-    <!-- Settings Sidebar -->
-    <div id="main">
-    <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
-    <script src="openSettings.js"></script>
-    </div>
+ <!-- Settings Sidebar -->
+<div id="main">
+    <!-- Open Sidebar -->
+  <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
+  <script src="openSettings.js"></script>
+</div>
 
-    <!-- Fixes bug that opens settings panel when site loads -->
-    <body onload="closeNav()"></body>
+<!-- Fixes bug that opens settings panel when site loads -->
+<body onload="closeNav()"></body>
 
-    <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#">Account</a>
-    <a>Light/Dark mode:</a>
-        <label class="switch"> 
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-        </label>
-    <script src="toggle-theme.js"></script>
-    <a href="#">Notifications</a>
-    <a href="https://www.sgstechnologies.net/contact">Contact Us</a>
-    </div>
+<script src="updatePassword.js"></script>
+<div id="mySidebar" class="sidebar">
+    <!-- Close Sidebar -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+  <!-- Appearance Settings -->
+  <script src="appearanceSettings.js"></script>
+  <a href="javascript:void(0)" onclick="toggleAppearanceMenu()">Appearance</a>
+  <ul id="appearanceSubmenu" style="display:none;">
+    <li>   
+        <!-- Light and Dark mode toggle -->
+        <a> Light/Dark Mode: </a>
+            <label class="switch"> 
+                <input type="checkbox" id="theme-toggle" style="display:none;">
+                <span class="slider"></span>
+            </label>
+        <script src="toggle-theme.js"></script></li>
+  </ul>
+  
+
+  <!-- Notification Settings -->
+  <a href="#">Notifications</a>
+  <a href="https://www.sgstechnologies.net/contact">Contact Us</a>
+</div>
+
     <h1>Login</h1>
     <hr>
     <?php
