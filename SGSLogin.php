@@ -4,10 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="appStyle.css">
     <script src="passwordSecurity.js"></script>
 </head>
 <body>
+
+    <!-- Settings Sidebar -->
+    <div id="main">
+    <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
+    <script src="openSettings.js"></script>
+    </div>
+
+    <!-- Fixes bug that opens settings panel when site loads -->
+    <body onload="closeNav()"></body>
+
+    <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="#">Account</a>
+    <a>Light/Dark mode:</a>
+        <label class="switch"> 
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    <script src="toggle-theme.js"></script>
+    <a href="#">Notifications</a>
+    <a href="https://www.sgstechnologies.net/contact">Contact Us</a>
+    </div>
     <h1>Login</h1>
     <hr>
     <?php

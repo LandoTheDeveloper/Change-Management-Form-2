@@ -1,30 +1,24 @@
 <?php
 // Check if the form is submitted <-- FROM SGSLogin.php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    include "db_conn.php";
     // Retrieve the username and password from the form
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    // Connect to the database
-    $servername = "localhost";
-    $db_username = "root";
-    $db_password = "";
-    $database = "user_information";
-
-    $conn = new mysqli($servername, $db_username, $db_password, $database);
-
+    
     // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
     }
 
     // Prepare the SQL statement using prepared statements
-    $stmt = $conn->prepare("SELECT id, username, email, password, company FROM users WHERE username = ? AND password = ?");
+    $stmt = $connection->prepare("SELECT id, username, email, password, company FROM users WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $adminstmt = $conn->prepare("SELECT name, contactNumber, contactEmail, password FROM admins WHERE name = ? AND password = ?");
+    $adminstmt = $connection->prepare("SELECT name, contactNumber, contactEmail, password FROM admins WHERE name = ? AND password = ?");
     $adminstmt->bind_param("ss", $username, $password);
     $adminstmt->execute();
     $admin_result = $adminstmt->get_result();
@@ -64,6 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Close the database connection
-    $conn->close();
+    $connection->close();
 }
 ?>

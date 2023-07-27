@@ -6,6 +6,12 @@ const body = document.body;
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     body.classList.add(savedTheme);
+    if(body.classList.contains('light-mode')){
+        themeToggle.checked = false;
+    } else {
+        themeToggle.checked = true;
+    }
+
 }
 
 themeToggle.addEventListener('change', function() {

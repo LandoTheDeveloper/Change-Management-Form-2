@@ -1,83 +1,140 @@
 <!DOCTYPE html>
+<?php
+// Start a session
+session_start();
+?>
 <html class="container">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 
+<title>Home Page</title>
 <link rel="stylesheet" href="appStyle.css">
 </head>
 <body>
 
 
+<!-- Settings Sidebar -->
 <div id="main">
+    <!-- Open Sidebar -->
   <button class="openbtn" onclick="openNav()">⚙ Settings</button>  
   <script src="openSettings.js"></script>
 </div>
 
+<!-- Fixes bug that opens settings panel when site loads -->
 <body onload="closeNav()"></body>
 
+<script src="updatePassword.js"></script>
 <div id="mySidebar" class="sidebar">
+    <!-- Close Sidebar -->
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="#">Account</a>
-    <label class="switch"> 
-        <input type="checkbox" id="theme-toggle">
-        <span class="slider"></span>
-    </label>
-  <script src="toggle-theme.js"></script>
+  <!-- Account Settings -->
+  <a href="javascript:void(0)" onclick="toggleSubmenu()">Account</a>
+  <ul id="accountSubmenu">
+    <li><a href="#" onclick="openPasswordPopup()">Change Password</a></li>
+  </ul>
+
+  <!-- Appearance Settings -->
+  <script src="appearanceSettings.js"></script>
+  <a href="javascript:void(0)" onclick="toggleAppearanceMenu()">Appearance</a>
+  <ul id="appearanceSubmenu" style="display:none;">
+    <li>   
+        <!-- Light and Dark mode toggle -->
+        <a> Light/Dark Mode: </a>
+            <label class="switch"> 
+                <input type="checkbox" id="theme-toggle" style="display:none;">
+                <span class="slider"></span>
+            </label>
+        <script src="toggle-theme.js"></script></li>
+  </ul>
+  
+
+  <!-- Notification Settings -->
   <a href="#">Notifications</a>
-  <a href="https://www.sgstechnologies.net/contact">Help Desk</a>
+  <a href="https://www.sgstechnologies.net/contact">Contact Us</a>
+
+  <!-- Log Out Button -->
+  <form action="SGSLogin.php" id="logOut">
+            <label for="logout">
+                <input type="submit" value="Log Out" class="button">
+            </label>
+        </form>
 </div>
 
-</body>
+<!-- Password change popup -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="updatePassword.js"></script>
+<div id="passwordPopup" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePasswordPopup()">×</span>
+        <h2>Change Password</h2>
+        <form action="" id="changePasswordForm">
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" id="currentPassword" required placeholder="Current Password">
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" required placeholder="New Password">
+            <label for="confirmPassword">Confirm New Password:</label>
+            <input type="password" id="confirmPassword" required placeholder="Confirm Password">
+            <button type="submit" class="button">Change Password</button>
+        </form>
+    </div>
+</div>
 
+<script>
+    
+    $(document).ready(function() {
 
-<head>
-    <title>Home Page</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Status Styles */
-        .status-column {
-        width: 150px;
+        // Confirm that the passwords are the same
+        function checkPasswordMatch() {
+            var pass = $("#newPassword").val();
+            var confirm_pass = $("#confirmPassword").val();
+
+            if (pass === confirm_pass){
+                return true;
+            } else {
+                alert("Passwords do not match.");
+                return false;
+            }
         }
-        .awaiting {
-            color: #f8f8f8;
-            background-color: rgb(90, 90, 90);
-        }
+            // When the changePasswordForm is submitted
+            $("#changePasswordForm").submit(function() {
+                if (checkPasswordMatch()){
+                
+                var newPassword = $("#newPassword").val();
+                var currentPassword = $("#currentPassword").val();
+                
+                // Send the data to the server using AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "updatePassword.php",
+                    data: { newPassword: newPassword, currentPassword: currentPassword },
+                    success: function(response) {
+                        // Handle the response if needed
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors if any
+                        console.error(error);
+                    }
+                });
+            }
+        });
+    });
+   
+    
+</script>
 
-        .not-started {
-        color: #f8f8f8;
-        background-color: rgb(170, 1, 1);
-        }
 
-        .in-progress {
-        color: #f8f8f8;
-        background-color: rgb(165, 165, 0);
-        }
 
-        .completed {
-        color: #f8f8f8;
-        background-color: green;
-        }
-
-    </style>
-</head>
-<body>
 <?php
-// Establish a connection to the server
-$servername = "localhost";
-$db_username = "root";
-$db_password = "";
-$database = "user_information";
+include "db_conn.php";
 
-$conn = new mysqli($servername, $db_username, $db_password, $database);
 
-// Start a session
-session_start();
 
 // Retrieve the username from the session variable
 $username = $_SESSION['username'] ?? '';
 
 // Check if the user is an admin
-$isAdmin = $conn->prepare("SELECT name FROM admins WHERE name = ?;");
+$isAdmin = $connection->prepare("SELECT name FROM admins WHERE name = ?;");
 $isAdmin->bind_param("s", $username);
 $isAdmin->execute();
 $isAdmin->bind_result($_isAdmin);
@@ -100,7 +157,7 @@ if ($_isAdmin) {
 
         // Perform the user search query
         $sql = "SELECT id, username, email, gender, phone, name, company FROM users WHERE username LIKE '%$search%'";
-        $result = $conn->query($sql);
+        $result = $connection->query($sql);
 
         // Print all user data
         if ($result->num_rows > 0) {
@@ -126,7 +183,7 @@ if ($_isAdmin) {
 
         // Retrieve the user's projects
         $userProjects = "SELECT name, description, status, SGSContact, projectid FROM projects WHERE user = '$search'";
-        $projectsResult = $conn->query($userProjects);
+        $projectsResult = $connection->query($userProjects);
 
         if ($projectsResult->num_rows > 0) {
             echo "<h2>User Projects</h2>";
@@ -250,18 +307,6 @@ if ($_isAdmin) {
     } else {
         echo "No users found.";
     }
-    ?>
-
-    <!-- Log out button -->
-    <form action="SGSLogin.php" id="logOut">
-        <label for="logout">
-            <input type="submit" value="Log Out" class="button">
-        </label>
-    </form>
-
-    <?php
-
-
 
 // Non-Admin User
 } else {
@@ -269,7 +314,7 @@ if ($_isAdmin) {
 
     // Retrieve the user's projects
     $userProjects = "SELECT name, description, status, SGSContact, contactNumber, contactEmail FROM projects WHERE user = '$username'";
-    $projectsResult = $conn->query($userProjects);
+    $projectsResult = $connection->query($userProjects);
 
     if ($projectsResult->num_rows > 0) {
         echo "<h2>Your Projects</h2>";
@@ -295,12 +340,12 @@ if ($_isAdmin) {
             } else {
                 $showStatus = "Awaiting Confirmation";
             }
-            echo "<td class='status-column $status'>$showStatus</td>";
+            echo "<td class='status-column $status' align:'center'>$showStatus</td>";
 
             // Get admin contact information and fill it into the table
             $adminContact = $project['SGSContact'];
             $admins = "SELECT name, contactNumber, contactEmail FROM admins WHERE name = '$adminContact'";
-            $adminResult = $conn->query($admins);
+            $adminResult = $connection->query($admins);
             while ($admin = $adminResult->fetch_assoc()){
                 // Display which SGS employee is on the project.
                 echo "<td>" . $project['SGSContact'] . "</td>";
@@ -321,15 +366,11 @@ if ($_isAdmin) {
 
     echo "</table>";
 
-    // Log out button and Project Creation Button
+    // Project creation page
     echo '<form action="project_creation_page.html">
             <input type="submit" value="Create A Project" class="button">
-        </form>
-        <form action="SGSLogin.php" id="logOut">
-            <label for="logout">
-                <input type="submit" value="Log Out" class="button">
-            </label>
         </form>';
+
 }
 ?>
 

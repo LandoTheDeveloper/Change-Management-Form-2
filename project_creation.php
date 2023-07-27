@@ -1,21 +1,10 @@
 <?php
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Retrieve the username and password from the form
-    $proj_name = $_POST["proj_name"];
-    $proj_desc = $_POST['proj_desc'];
-
-    // Connect to the database
-    $servername = "localhost";
-    $db_username = "root";
-    $db_password = "";
-    $database = "user_information";
-
-    $conn = new mysqli($servername, $db_username, $db_password, $database);
-
+    include "db_conn.php";
     // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
     }
 
     // Start a session
@@ -26,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get date of creation
     $date = date("m/d/Y");
 
-    $cmpnystmt = $conn->prepare("SELECT company FROM users WHERE username = ?;");
+    $cmpnystmt = $connection->prepare("SELECT company FROM users WHERE username = ?;");
     $cmpnystmt->bind_param("s", $user);
     $cmpnystmt->execute();
     $cmpnystmt->bind_result($company);
@@ -34,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cmpnystmt->close();
 
     // Prepare the SQL statement using prepared statements
-    $stmt = $conn->prepare("INSERT INTO projects (name, description, user, company, dateCreated) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $connection->prepare("INSERT INTO projects (name, description, user, company, dateCreated) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $proj_name, $proj_desc, $user, $company, $date);
     if ($stmt->execute()) {
         header("Location: home_page.php");
@@ -43,6 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Close the database connection
     $stmt->close();
-    $conn->close();
+    $connection->close();
 }
 ?>
