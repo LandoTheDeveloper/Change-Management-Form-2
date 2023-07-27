@@ -83,6 +83,22 @@ input[type="submit"].button {
   font-weight: bold;
 }
 
+.claimButton,
+input[type="submit"].button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  color: #333;
+  border-color: #333;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background-color 0.3s ease;
+  border: solid;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 button.button:hover,
 input[type="submit"].button:hover {
   background-color: #333;
@@ -163,8 +179,12 @@ body.light-mode tr:nth-child(odd) {
   right: 0;
   background-color: #111;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: .5s;
   padding-top: 60px;
+}
+
+.sidebar-hidden {
+  width: 0;
 }
 
 .sidebar a {
@@ -191,7 +211,7 @@ body.light-mode tr:nth-child(odd) {
 .openbtn {
   font-size: 20px;
   cursor: pointer;
-  background-color: #111;
+  background-color: #222;
   color: #f8f8f8;
   padding: 10px 15px;
   border: none;

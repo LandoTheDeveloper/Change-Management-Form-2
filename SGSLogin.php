@@ -20,7 +20,7 @@
 <body onload="closeNav()"></body>
 
 <script src="updatePassword.js"></script>
-<div id="mySidebar" class="sidebar">
+<div id="mySidebar" class="sidebar sidebar-hidden">
     <!-- Close Sidebar -->
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 
