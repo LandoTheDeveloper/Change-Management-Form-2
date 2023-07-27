@@ -295,7 +295,7 @@ if ($_isAdmin) {
                                     console.log(response);
 
                                     // Update the "SGSContact" column in the table without reloading the page
-                                    var sgsColumn = $('#statusColumn_' + projectId);
+                                    var sgsColumn = $('#claimButton_' + projectId);
                                     sgsColumn.removeClass('not-started').addClass('completed').text(response);
                                     location.reload();
                                     // Hide the claim button
