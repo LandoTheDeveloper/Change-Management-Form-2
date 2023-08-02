@@ -11,4 +11,4 @@ function openPasswordPopup() {
 function closePasswordPopup() {
     var popup = document.getElementById("passwordPopup");
     popup.style.display = "none";
-}
+} 

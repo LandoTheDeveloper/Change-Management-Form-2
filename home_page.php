@@ -36,7 +36,7 @@ session_start();
   <ul id="appearanceSubmenu" style="display:none;">
     <li>   
         <!-- Light and Dark mode toggle -->
-        <a id="submenuText"> Light/Dark Mode: </a>
+        <a id="submenuText" class="light-mode"> Light/Dark Mode: </a>
             <label class="switch"> 
                 <input type="checkbox" id="theme-toggle" style="display:none;">
                 <span class="slider"></span>
@@ -45,8 +45,7 @@ session_start();
   </ul>
   
 
-  <!-- Notification Settings -->
-  <a href="#" id="sidebarTxt">Notifications</a>
+  <!-- Contact Us -->
   <a href="https://www.sgstechnologies.net/contact" id="sidebarTxt">Contact Us</a>
 
   <!-- Log Out Button -->
@@ -185,18 +184,19 @@ if ($_isAdmin) {
         echo "</table>";
 
         // Retrieve the user's projects
-        $userProjects = "SELECT name, description, status, SGSContact, projectid FROM projects WHERE user = '$search'";
+        $userProjects = "SELECT name, description, status, SGSContact, projectid, dateCreated FROM projects WHERE user = '$search'";
         $projectsResult = $connection->query($userProjects);
 
         if ($projectsResult->num_rows > 0) {
             echo "<h2>User Projects</h2>";
             echo "<table>";
-            echo "<tr><th>Name</th><th>Description</th><th>Status</th><th>SGS Contact</th></tr>";
+            echo "<tr><th>Name</th><th>Description</th><th>Date Created</th><th>Status</th><th>SGS Contact</th></tr>";
 
             while ($project = $projectsResult->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $project['name'] . "</td>";
                 echo "<td>" . $project['description'] . "</td>";
+                echo "<td>" . $project['dateCreated'] . "</td>";
 
                 // Display status of project
                 $status = $project['status'];

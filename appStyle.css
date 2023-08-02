@@ -87,7 +87,7 @@ input[type="submit"].button {
   border-color: #333;
   text-decoration: none;
   border-radius: 100px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
   border: solid;
   cursor: pointer;
   font-size: 16px;
@@ -103,7 +103,7 @@ input[type="submit"].button {
   border-color: #333;
   text-decoration: none;
   border-radius: 100px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
   border: solid;
   cursor: pointer;
   font-size: 16px;
@@ -133,11 +133,13 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  transition: background-color .5s ease;
 }
 
 th, 
 td {
-  border: 1px solid #000;
+  border: 1px solid #333;
+  transition: background-color .5s ease;
 }
 
 /* Table Styles for Dark Mode */
@@ -158,17 +160,19 @@ body.dark-mode th {
 
 body.dark-mode tr:nth-child(even) {
   background-color: #777;
+  transition: background-color .5s ease;
 }
 
 /* Table Styles for Light Mode */
 body.light-mode table {
   background-color: #f8f8f8;
-  color: #000;
+  color: #333;
+  transition: background-color .5s ease;
 }
 
 body.light-mode th,
 body.light-mode td {
-  border: 1px solid #000;
+  border: 1px solid #333;
   padding: 5px;
 }
 
@@ -178,6 +182,7 @@ body.light-mode th {
 
 body.light-mode tr:nth-child(odd) {
   background-color: #ededed;
+  transition: background-color .5s ease;
 }
 
 /* Sidebar Styles */
@@ -212,7 +217,7 @@ body.light-mode tr:nth-child(odd) {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #000;
+  color: #333;
   display: block;
   transition: 0.3s;
 }
@@ -267,7 +272,7 @@ body.light-mode tr:nth-child(odd) {
 
 
 #main {
-  transition: margin-left 0.5s;
+  transition: background-color 0.5s ease, color 0.5s ease;
   padding: 16px;
 }
 
@@ -309,37 +314,6 @@ body.light-mode tr:nth-child(odd) {
   background-color: #444;
 }
 
-/* Style the Light/Dark Mode toggle switch */
-.switch {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.slider {
-  position: relative;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-  background-color: #fff;
-  border-radius: 50%;
-  transition: 0.4s;
-  transform: translate(-40px, 7px);
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  transform: translate(0px, .2px);
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(20px);
-}
-
 #appearanceSubmenu {
   display: none;
   list-style-type: none;
@@ -350,19 +324,28 @@ input:checked + .slider:before {
   margin-bottom: 10px;
   display: flex; /* Use flexbox to create a row layout */
   align-items: center; /* Align items vertically in the center */
+  font-size: 20px;
 }
 
-#appearanceSubmenu li a {
+#appearanceSubmenu li a .light-mode{
   text-decoration: none;
   color: #818181;
-  font-size: 16px;
-  flex-grow: 1; /* Allow the link to occupy remaining space in the row */
+  font-size: 20px;
+  flex-grow: 1;
+}
+
+#appearanceSubmenu li a .dark-mode{
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+  flex-grow: 1;
 }
 
 /* Style the Light/Dark Mode toggle switch */
 .switch {
   display: inline-block;
   vertical-align: middle;
+  transform: translate(-10px, 7px);
 }
 
 .slider {
@@ -508,7 +491,7 @@ input {
   right: -300px; /* Initially hide the sidebar outside the screen */
   width: 300px;
   height: 100%;
-  transition: right 0.3s ease; /* Add transition for a smooth slide effect */
+  transition: background-color .5s ease, right .3s ease;
 }
 
 #mySidebar.show {
@@ -525,7 +508,7 @@ input {
   margin-bottom: 10px;
 }
 
-#accountSubmenu li a {
+#accountSubmenu li a .light-mode{
   text-decoration: none;
   color: #818181;
   font-size: 20px;
@@ -533,6 +516,19 @@ input {
   transition: 0.3s;
 }
 
-#accountSubmenu li a:hover {
+#accountSubmenu li a .dark-mode{
+  text-decoration: none;
+  color: #818181;
+  font-size: 20px;
+  display: block;
+  transition: 0.3s;
+}
+
+#accountSubmenu li a:hover .dark-mode{
   color: #f1f1f1;
 }
+
+#accountSubmenu li a:hover .light-mode{
+  color: #f8f8f8;
+}
+

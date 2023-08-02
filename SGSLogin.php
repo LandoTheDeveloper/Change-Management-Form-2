@@ -20,8 +20,6 @@
 <div id="mySidebar" class="sidebar">
     <!-- Close Sidebar -->
   <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()" id="sidebarTxt">×</a>
-  <!-- Account Settings -->
-  <a href="javascript:void(0)" onclick="toggleSubmenu()" id="sidebarTxt">Account</a>
   <!-- Appearance Settings -->
   <a href="javascript:void(0)" onclick="toggleAppearanceMenu()" id="sidebarTxt">Appearance</a>
   <ul id="appearanceSubmenu" style="display:none;">

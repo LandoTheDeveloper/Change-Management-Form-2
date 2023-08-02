@@ -5,7 +5,6 @@ const modal = document.getElementById("modal-content");
 const openBtn = document.getElementById("openbtn");
 const sidebar = document.getElementById("mySidebar");
 const sidebarTxt = document.getElementById("sidebarTxt");
-const submenuText = document.getElementById("submenuText");
 
 // Check if there's a previously saved theme preference
 const savedTheme = localStorage.getItem('theme');
@@ -15,7 +14,6 @@ if (savedTheme) {
     openBtn.classList.add(savedTheme);
     sidebar.classList.add(savedTheme);
     sidebarTxt.classList.add(savedTheme);
-    submenuText.classList.add(savedTheme);
     if(body.classList.contains('light-mode')){
         themeToggle.checked = false;
     } else {
@@ -38,8 +36,6 @@ themeToggle.addEventListener('change', function() {
         sidebar.classList.add('dark-mode');
         sidebarTxt.classList.remove('light-mode');
         sidebarTxt.classList.add('dark-mode');
-        submenuText.classList.remove('light-mode');
-        submenuText.classList.add('dark-mode');
         localStorage.setItem('theme', 'dark-mode');
         
     // Light Mode
@@ -55,8 +51,6 @@ themeToggle.addEventListener('change', function() {
         sidebar.classList.add('light-mode');
         sidebarTxt.classList.remove('dark-mode');
         sidebarTxt.classList.add('light-mode');
-        submenuText.classList.remove('dark-mode');
-        submenuText.classList.add('light-mode');
         localStorage.setItem('theme', 'light-mode');
     }
 });
