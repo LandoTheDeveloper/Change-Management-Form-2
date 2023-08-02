@@ -32,10 +32,7 @@
             </label>
         </li>
   </ul>
-  
-
-  <!-- Notification Settings -->
-  <a href="#" id="sidebarTxt">Notifications</a>
+  <!-- Contact us -->
   <a href="https://www.sgstechnologies.net/contact" id="sidebarTxt">Contact Us</a>
 </div>
     <h1>Login</h1>

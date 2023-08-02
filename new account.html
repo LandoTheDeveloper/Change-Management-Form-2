@@ -1,8 +1,71 @@
 <html class="container">
     <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="appStyle.css">
     </head>
     <body>
+        
+        <!-- Settings Sidebar -->
+        <div id="main">
+            <!-- Open Sidebar -->
+        <button class="openbtn" onclick="toggleSidebar()" id="openbtn">Settings</button>  
+        </div>
+
+
+        <div id="mySidebar" class="sidebar">
+            <!-- Close Sidebar -->
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()" id="sidebarTxt">x</a>
+        <!-- Account Settings -->
+        <a href="javascript:void(0)" onclick="toggleSubmenu()" id="sidebarTxt">Account</a>
+        <ul id="accountSubmenu">
+            <li><a href="#" onclick="openPasswordPopup()" id="sidebarTxt">Change Password</a></li>
+        </ul>
+
+        <!-- Appearance Settings -->
+        
+        <a href="javascript:void(0)" onclick="toggleAppearanceMenu()" id="sidebarTxt">Appearance</a>
+        <ul id="appearanceSubmenu" style="display:none;">
+            <li>   
+                <!-- Light and Dark mode toggle -->
+                <a id="submenuText"> Light/Dark Mode: </a>
+                    <label class="switch"> 
+                        <input type="checkbox" id="theme-toggle" style="display:none;">
+                        <span class="slider"></span>
+                    </label>
+                </li>
+        </ul>
+        
+
+        <!-- Notification Settings -->
+        <a href="#" id="sidebarTxt">Notifications</a>
+        <a href="https://www.sgstechnologies.net/contact" id="sidebarTxt">Contact Us</a>
+
+        <!-- Log Out Button -->
+        <form action="SGSLogin.php" id="logOut">
+                    <label for="logout">
+                        <input type="submit" value="Log Out" class="button">
+                    </label>
+                </form>
+        </div>
+
+        <!-- Password change popup -->
+
+
+        <div id="passwordPopup" class="modal">
+            <div id="modal-content" class="modal-content" >
+                <span class="close" onclick="closePasswordPopup()">×</span>
+                <h2>Change Password</h2>
+                <form action="" id="changePasswordForm">
+                    <label for="currentPassword">Current Password:</label>
+                    <input type="password" id="currentPassword" required placeholder="Current Password">
+                    <label for="newPassword">New Password:</label>
+                    <input type="password" id="newPassword" required placeholder="New Password">
+                    <label for="confirmPassword">Confirm New Password:</label>
+                    <input type="password" id="confirmPassword" required placeholder="Confirm Password">
+                    <button type="submit" class="button">Change Password</button>
+                </form>
+            </div>
+        </div>
+
         <h1>Account Creation</h1>
         <hr>
         <form action="create_account.php" method="post" onsubmit="return checkPasswordMatch()" id="info">
@@ -55,4 +118,9 @@
             <input type="submit" value="Create" class="button">
         </form>
     </body>
+
+    <script src="openSettings.js"></script>
+    <script src="appearanceSettings.js"></script>
+    <script src="toggle-theme.js"></script>
+    <script src="updatePassword.js"></script>
 </html>

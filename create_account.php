@@ -18,15 +18,6 @@ $company = $_POST['company'];
 // Prepare and execute the SQL statement to insert the new user
 $stmt = $connection->prepare("INSERT INTO users (username, password, email, gender, phone, name, company) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sssssss", $username, $password, $email, $gender, $phone, $name, $company);
-
-if ($stmt->execute()) {
-    // Redirect to home_page.php with the username as a POST parameter
-    header('Location: http://localhost/demo/SGSLogin.php');
-    exit;
-} else {
-    echo "Error: " . $stmt->error;
-}
-
 // Close the statement and connection
 $stmt->close();
 $connection->close();

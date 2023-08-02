@@ -222,6 +222,24 @@ body.light-mode tr:nth-child(odd) {
   transition: 0.3s;
 }
 
+.sidebar.light-mode li a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar.dark-mode li a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
 .sidebar.dark-mode a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
