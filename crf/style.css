@@ -51,7 +51,8 @@ h1 {
 /* Style for input fields */
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="date"] {
   width: 40%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -134,7 +135,7 @@ textarea {
 .button {
   display: inline-block;
   padding: 5px 5px;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
   text-decoration: none;
   color: #333;
