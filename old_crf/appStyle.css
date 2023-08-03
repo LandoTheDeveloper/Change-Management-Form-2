@@ -125,7 +125,6 @@ input[type="submit"].button:hover {
 .required-field::after {
   content: "*";
   color: red;
-  margin-left: 5px;
 }
 
 /* Table Styles */
@@ -550,3 +549,12 @@ input {
   color: #f8f8f8;
 }
 
+input[type="radio"] {
+  position: relative;
+  transform: translate(-370px, -15px);
+}
+
+.rowElem {
+  display: flex;
+  align-items: center;
+}

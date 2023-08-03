@@ -184,20 +184,20 @@ if ($_isAdmin) {
         echo "</table>";
 
         // Retrieve the user's projects
-        $userProjects = "SELECT name, description, status, SGSContact, projectid, dateCreated FROM projects WHERE user = '$search'";
+        $userProjects = "SELECT name, description, status, SGSContact, projectid, dateCreated, priority FROM projects WHERE user = '$search'";
         $projectsResult = $connection->query($userProjects);
 
         if ($projectsResult->num_rows > 0) {
             echo "<h2>User Projects</h2>";
             echo "<table>";
-            echo "<tr><th>Name</th><th>Description</th><th>Date Created</th><th>Status</th><th>SGS Contact</th></tr>";
+            echo "<tr><th>Name</th><th>Description</th><th>Date Created</th><th>Priority</th><th>Status</th><th>SGS Contact</th></tr>";
 
             while ($project = $projectsResult->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $project['name'] . "</td>";
                 echo "<td>" . $project['description'] . "</td>";
                 echo "<td>" . $project['dateCreated'] . "</td>";
-
+                echo "<td>" . $project['priority'] . "</td>";
                 // Display status of project
                 $status = $project['status'];
                 if ($status == NULL){
@@ -259,8 +259,6 @@ if ($_isAdmin) {
                 } else {
                     echo "<td class='status-column completed'>$sgsc</td>";
                 }
-                
-                
                         echo "</tr>";
             }
                             echo "</table>";

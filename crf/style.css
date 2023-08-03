@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f8f8f8;
+    color: #333;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+/* Top of page */
+.black-bar {
+  background-color: black;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.logo {
+  height: 75px;
+  margin: 10px;
+}
+
+/* Center the page content */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+/* Add a style for headings */
+h1 {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  /* Add a style for paragraphs */
+  p {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for links */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+/* Style for input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+  /* Style for text areas */
+textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 150px; /* Set the desired height of the text area */
+  padding: 10px;
+  margin: 10px;
+  font-family: Arial, sans-serif; /* Choose your preferred font */
+  font-size: 14px; /* Set the font size */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  
+}
+
+.rowElem {
+    display: flex;
+    align-items: center;
+}
+.rowElem label {
+    margin-right: 50px;
+}
+
+.radioElem {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.radioElem select {
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.radioElem option {
+  padding: 5px;
+}
+
+/* Style for the submit button */
+.submit_button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  background-color: #f8f8f8;
+  border: solid;
+  border-radius: 6px;
+  border-width: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.submit_button:hover {
+  background-color: #333;
+  color: #f8f8f8;
+}
+
+/* Active effect */
+.submit_button:active {
+  background-color: #111;
+  color: #f6f6f6;
+}
+
+
+/* Style for the button */
+.button {
+  display: inline-block;
+  padding: 5px 5px;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  background-color: #f8f8f8;
+  border: solid;
+  border-radius: 6px;
+  border-width: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.button:hover {
+  background-color: #333;
+  color: #f8f8f8;
+}
+
+/* Active effect */
+.button:active {
+  background-color: #111;
+  color: #f6f6f6;
+}
+

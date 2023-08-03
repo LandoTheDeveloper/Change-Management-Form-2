@@ -11,8 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_start();
     // Retrieve username
     $user = $_SESSION['username'];
+    // Retrieve project information
     $proj_name = $_POST['proj_name'];
     $proj_desc = $_POST['proj_desc'];
+    $proj_prio = $_POST['proj_prio'];
     // Get date of creation
     $date = date("m/d/Y");
 
@@ -24,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cmpnystmt->close();
 
     // Prepare the SQL statement using prepared statements
-    $stmt = $connection->prepare("INSERT INTO projects (name, description, user, company, dateCreated) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $proj_name, $proj_desc, $user, $company, $date);
+    $stmt = $connection->prepare("INSERT INTO projects (name, description, user, company, dateCreated, priority) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $proj_name, $proj_desc, $user, $company, $date, $proj_prio);
     if ($stmt->execute()) {
         header("Location: home_page.php");
         exit;
