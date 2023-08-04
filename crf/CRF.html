@@ -16,7 +16,7 @@
     <div class="container">
         <h1>Change Request Form</h1>
         
-        <form id="change-request-form" method="post" enctype="multipart/form-data" action="emailSend.php">
+        <form id="change-request-form" method="post" enctype="multipart/form-data" action="">
             <h2>General Information</h2>
             <label for="project-name">Project Name:</label>
             <input type="text" id="project-name" name="project_name" required><br>
@@ -45,34 +45,36 @@
                     <textarea id="scope-of-work-editor" name="items[]" required></textarea>
                     <label>Hours Assigned:</label>
                     <input type="number" name="hours[]" required>
-                    <button type="button" onclick="removeItemField(this)" class="button">Remove</button>
                 </div>
             </div>
             <button type="button" onclick="addItemField()" class="button">Add Item</button>
             <br>
             <h2>Client Acceptance</h2>
             <label>Acceptance:</label>
-            <input type="radio" name="acceptance" value="accepted"> Yes
-            <input type="radio" name="acceptance" value="not_accepted"> No<br>
+            <input type="radio" name="acceptance" value="accepted" id="accepted"> Yes
+            <input type="radio" name="acceptance" value="not_accepted" id="not_accepted"> No<br>
             
-            <label for="client-name">Client Name:</label>
-            <input type="text" id="client-name" name="client_name"><br>
-            
-            <!-- Signature canvas -->
-            <label for="client-signature">Client Signature:</label>
-            <canvas id="signature-canvas" width="300" height="150" style="border: 1px solid #000;"></canvas><br>
-            <button type="button" onclick="clearSignatureCanvas()" class="button">Clear Signature</button><br>
-            <input type="hidden" id="signature-data" name="client_signature">
-            
-            <label for="client-approver-title">Title of Client Approver:</label>
-            <input type="text" id="client-approver-title" name="client_approver_title"><br>
-            
-            <label for="approval-date">Date of Approval:</label>
-            <input type="date" id="approval-date" name="approval_date"><br>
-            
-            <label for="comments">Comments:</label><br>
-            <textarea id="comments" name="comments" placeholder='If "No" is selected, please provide a rationale and description of what is required to attain approval.'></textarea><br>
-            
+            <div id="accepted_visibility">
+                <label for="client-name">Client Name:</label>
+                <input type="text" id="client-name" name="client_name"><br>
+                
+                <!-- Signature canvas -->
+                <label for="client-signature">Client Signature:</label>
+                <canvas id="signature-canvas" width="300" height="150" style="border: 1px solid #000;"></canvas><br>
+                <button type="button" onclick="clearSignatureCanvas()" class="button">Clear Signature</button><br>
+                <input type="hidden" id="signature-data" name="client_signature">
+                
+                <label for="client-approver-title">Title of Client Approver:</label>
+                <input type="text" id="client-approver-title" name="client_approver_title"><br>
+                
+                <label for="approval-date">Date of Approval:</label>
+                <input type="date" id="approval-date" name="approval_date"><br>
+            </div>
+
+            <div id="not_accepted_visibility">
+                <label for="comments">Comments:</label><br>
+                <textarea id="comments" name="comments" placeholder='If "No" is selected, please provide a rationale and description of what is required to attain approval.'></textarea><br>
+            </div>
             <button type="submit" class="submit_button">Submit</button>
         </form>
     </div>
@@ -80,6 +82,7 @@
     <script src="itemFields.js"></script>
     <script src="canvas.js"></script>
     <script src="rich-text-editor.js"></script>
+    <script src="showAcceptance.js"></script>
 
 </body>
 </html>
