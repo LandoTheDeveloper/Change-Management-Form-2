@@ -5,7 +5,7 @@ if (isset($_GET['projectName'])) {
     $projectName = $_GET['projectName'];
 
     // Fetch project details based on the selected project name
-    $query = "SELECT cr_number, cr_type, submitter_name, date_submitted, client_email FROM project_information WHERE project_name = ?";
+    $query = "SELECT cr_num, email FROM project_information WHERE project_name = ?";
     $stmt = $connection->prepare($query);
     $stmt->bind_param("s", $projectName);
     $stmt->execute();

@@ -1,9 +1,13 @@
 function fetchProjectDetails(projectName) {
     fetch('getProjectDetails.php?projectName=' + encodeURIComponent(projectName))
-        .then(response => response.json())
+        .then(response => {
+            // Parse the response body as JSON
+            return response.json();
+        })
         .then(projectDetails => {
-            document.getElementById('cr-number').value = projectDetails.cr_number;
-            document.getElementById('client-email').value = projectDetails.client_email;
+            // Now you can work with the parsed JSON data
+            document.getElementById('cr-number').value = projectDetails.cr_num;
+            document.getElementById('client-email').value = projectDetails.email;
         })
         .catch(error => {
             console.error('Error fetching project details:', error);
