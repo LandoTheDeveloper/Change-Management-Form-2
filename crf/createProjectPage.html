@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Project Creation</title>
+    </head>
+
+    <body>
+        <div class="black-bar">
+            <a href="https://www.sgstechnologies.net/"><img src="logo.png" alt="SGS Technologies Logo" class="logo" id="logo"></a>
+        </div>
+        <div for="page-content" class="container">
+            <h1>Project Creation</h1>
+
+            <div for="project-name">
+                <form id="project-creation-form" method="post" enctype="multipart/form-data" action="create_project.php">
+                    <label for="project-name">Project Name:</label>
+                    <input type="text" id="project-name" name="project_name" required> <br>
+                    
+                    <label for="cr-number">CR#:</label>
+                    <input type="text" id="cr-number" name="cr_number" required><br>
+
+                    <label for="client-email">Client Email:</label>
+                    <input type="email" id="client-email" name="client_email" required><br>
+
+                    <input type="submit" value="Create Project" id="create-project" name="create-project" class="button">
+                    
+            </div>
+        </div>
+        
+    </body>
+</html>

@@ -13,13 +13,23 @@
         <a href="https://www.sgstechnologies.net/"><img src="logo.png" alt="SGS Technologies Logo" class="logo" id="logo"></a>
     </div>
     
-    <div class="container">
+    <div for="page-content" class="container">
         <h1>Change Request Form</h1>
         
         <form id="change-request-form" method="post" enctype="multipart/form-data" action="">
             <h2>General Information</h2>
+
             <label for="project-name">Project Name:</label>
-            <input type="text" id="project-name" name="project_name" required><br>
+            <select name="project_name_choice" id="project-name-choice">
+                <option value=""></option>
+            </select> <br>
+            
+            <script src="dropdown.js"></script>
+            <script>
+                populateProjectDropdown();
+            </script>
+            <input type="text" id="project-name" name="project_name" required disabled="disabled">
+            <button id="newProject" class="button" onclick="createNewProject()">Create a New Project</button> <br>
             
             <label for="cr-number">CR#:</label>
             <input type="text" id="cr-number" name="cr_number" required><br>
@@ -83,6 +93,8 @@
     <script src="canvas.js"></script>
     <script src="rich-text-editor.js"></script>
     <script src="showAcceptance.js"></script>
+    <script src="createProject.js"></script>
+    <script src="fetchProjectDetails.js"></script>
 
 </body>
 </html>
