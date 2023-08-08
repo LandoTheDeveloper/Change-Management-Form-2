@@ -8,6 +8,7 @@ function fetchProjectDetails(projectName) {
             // Now you can work with the parsed JSON data
             document.getElementById('cr-number').value = projectDetails.cr_num;
             document.getElementById('client-email').value = projectDetails.email;
+            document.getElementById('project-name').value = projectName;
         })
         .catch(error => {
             console.error('Error fetching project details:', error);
