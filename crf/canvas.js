@@ -31,3 +31,5 @@ function clearSignatureCanvas() {
     canvasContext.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
     signatureDataInput.value = "";
 }
+
+    

@@ -12,18 +12,26 @@
     <div class="black-bar">
         <a href="https://www.sgstechnologies.net/"><img src="logo.png" alt="SGS Technologies Logo" class="logo" id="logo"></a>
     </div>
-    
-    <div for="page-content" class="container">
-        <h1>Change Request Form</h1>
+
+    <div class="sidebar">
+        <a href="projects.php">All Projects</a>
         
-        <form id="change-request-form" method="post" enctype="multipart/form-data" action="">
+    </div>
+    
+    <div for="page-content" class="container content">
+        <button class="settings-button" onclick="toggleSidebar()">Settings</button>
+        <h1>Change Request Form</h1>
+        <form id="change-request-form" method="post" enctype="multipart/form-data" action="insertForm.php">
             <h2>General Information</h2>
 
             <label for="project-name">Project Name:</label>
-            <select name="project_name_choice" id="project-name-choice">
+            <!-- Original select element, kept disabled -->
+            <select id="project-name-choice" disabled>
                 <option value=""></option>
-            </select> <br>
-            
+            </select>
+            <!-- Hidden input to store the selected project name -->
+            <input type="hidden" id="selected-project-name" name="selected_project_name">
+
             <script src="dropdown.js"></script>
             <script>
                 populateProjectDropdown();
@@ -32,7 +40,14 @@
             <button id="newProject" class="button" onclick="createNewProject()">Create a New Project</button> <br>
             
             <label for="cr-number">CR#:</label>
-            <input type="text" id="cr-number" name="cr_number" required><br>
+            <!-- Original input field, kept disabled -->
+            <input type="text" id="cr-number" name="cr_number" required disabled>
+
+            <!-- Hidden input to store the selected CR number -->
+            <input type="hidden" id="selected-cr-number" name="selected_cr_number">
+
+            
+
             
             <label for="cr-type">Type of CR:</label>
             <input type="text" id="cr-type" name="cr_type" required><br>
@@ -44,7 +59,11 @@
             <input type="date" id="date-submitted" name="date_submitted" required><br>
 
             <label for="client-email">Client Email:</label>
-            <input type="email" id="client-email" name="client_email" required><br>
+            <!-- Original input field, kept disabled -->
+            <input type="email" id="client-email" name="client_email" required disabled>
+
+            <!-- Hidden input to store the selected client email -->
+            <input type="hidden" id="selected-client-email" name="selected_client_email">
             
             <br>
             <h2>Scope of Work</h2>
@@ -52,7 +71,15 @@
                 <!-- Initial item field -->
                 <div class="item">
                     <label>Item:</label>
-                    <textarea id="scope-of-work-editor" name="items[]" required></textarea>
+                    <!-- Original textarea, kept hidden -->
+                    <textarea id="scope-of-work-editor" name="items[]"></textarea>
+
+                    <!-- Initialize TinyMCE on the original textarea -->
+                    <script>
+                        tinymce.init({
+                            selector: "#scope-of-work-editor",
+                        });
+                    </script>
                     <label>Hours Assigned:</label>
                     <input type="number" name="hours[]" required>
                 </div>
@@ -66,7 +93,7 @@
             
             <div id="accepted_visibility">
                 <label for="client-name">Client Name:</label>
-                <input type="text" id="client-name" name="client_name"><br>
+                <input type="text" id="client-name" name="client_name"><br> 
                 
                 <!-- Signature canvas -->
                 <label for="client-signature">Client Signature:</label>
@@ -95,6 +122,7 @@
     <script src="showAcceptance.js"></script>
     <script src="createProject.js"></script>
     <script src="fetchProjectDetails.js"></script>
+    <script src="openSettings.js"></script>
 
 </body>
 </html>

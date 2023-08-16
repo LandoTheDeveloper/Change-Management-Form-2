@@ -158,3 +158,46 @@ textarea {
   background-color: #111;
   color: #f6f6f6;
 }
+
+/* Sidebar styles */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px; /* Start the sidebar off-screen */
+  background-color: #333;
+  padding-top: 20px;
+  transition: left 0.3s ease; /* Add a smooth transition effect for the sidebar animation */
+}
+
+.sidebar.open {
+  left: 0; /* Show the sidebar when the open class is applied */
+}
+
+.sidebar a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #555;
+}
+
+.settings-button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  transform: translate(1000%);
+}
+
+/* Content area styles */
+.content {
+  margin-left: 270px; /* Adjust this to match the sidebar width + some spacing */
+  padding: 20px;
+}
